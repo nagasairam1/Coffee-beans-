@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behera Coffee Works — Farm-Direct Shade-Grown Arabica for Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#1c2a1e;
+    --forest-deep:#141f16;
+    --moss:#41573f;
+    --cherry:#a8422f;
+    --cherry-bright:#c65039;
+    --parchment:#efe8d8;
+    --parchment-dim:#e2d9c3;
+    --ochre:#bd8a3d;
+    --ink:#241f16;
+    --line: rgba(239,232,216,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--forest);
+    color:var(--parchment);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    font-size:16px;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    line-height:1.08;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace; letter-spacing:0.03em;}
+  a{color:inherit;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:1140px; margin:0 auto; padding:0 28px;}
+  section{position:relative;}
+
+  /* ---------- photo treatment (duotone tie-in) ---------- */
+  .photo{position:relative; overflow:hidden; background:var(--forest-deep);}
+  .photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .photo::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(160deg, rgba(28,42,30,0.55), rgba(20,31,22,0.32));
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+  .photo.warm::after{ background:linear-gradient(160deg, rgba(168,66,47,0.28), rgba(20,31,22,0.4)); }
+
+  /* ---------- topo texture ---------- */
+  .topo-bg{position:absolute; inset:0; opacity:0.5; pointer-events:none; overflow:hidden; mix-blend-mode:screen;}
+  .topo-bg svg{width:100%; height:100%;}
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(20,31,22,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.15rem;
+    letter-spacing:0.01em;
+  }
+  .brand .stamp{width:30px; height:30px;}
+  .navlinks{display:flex; align-items:center; gap:28px; font-size:0.92rem;}
+  .navlinks a{text-decoration:none; opacity:0.82; transition:opacity .15s;}
+  .navlinks a:hover, .navlinks a:focus-visible{opacity:1;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 22px; border-radius:2px;
+    font-size:0.92rem; font-weight:600;
+    text-decoration:none; border:1px solid transparent;
+    cursor:pointer; transition:transform .15s ease, background .15s ease;
+  }
+  .btn:focus-visible{outline:2px solid var(--ochre); outline-offset:3px;}
+  .btn-primary{background:var(--cherry); color:var(--parchment);}
+  .btn-primary:hover{background:var(--cherry-bright); transform:translateY(-1px);}
+  .btn-ghost{border-color:var(--line); color:var(--parchment);}
+  .btn-ghost:hover{border-color:var(--ochre);}
+
+  /* ---------- hero (photo background) ---------- */
+  .hero{
+    position:relative; padding:150px 0 110px; overflow:hidden;
+    min-height:640px; display:flex; align-items:center;
+  }
+  .hero-photo{position:absolute; inset:0; z-index:0;}
+  .hero-photo img{width:100%; height:100%; object-fit:cover;}
+  .hero-photo::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,31,22,0.88) 0%, rgba(20,31,22,0.72) 45%, rgba(20,31,22,0.95) 100%);
+  }
+  .hero .wrap{position:relative; z-index:2;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem;
+    text-transform:uppercase; letter-spacing:0.16em; color:var(--ochre);
+    display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow::before{content:""; width:26px; height:1px; background:var(--ochre);}
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 4.1rem);
+    max-width:16ch;
+    margin-bottom:26px;
+    text-shadow:0 2px 24px rgba(0,0,0,0.35);
+  }
+  .hero h1 em{font-style:italic; color:var(--ochre); font-weight:500;}
+  .hero p.lede{
+    max-width:52ch; font-size:1.15rem; color:var(--parchment-dim); margin-bottom:38px;
+  }
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+
+  /* trust strip */
+  .trust{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:22px 0; background:var(--forest-deep); position:relative; z-index:2;
+  }
+  .trust .wrap{
+    display:flex; flex-wrap:wrap; gap:14px 34px; align-items:center;
+    justify-content:space-between; font-size:0.84rem; color:var(--parchment-dim);
+  }
+  .trust span{display:flex; align-items:center; gap:8px; white-space:nowrap;}
+  .trust span::before{content:"✓"; color:var(--ochre); font-weight:700;}
+
+  /* ---------- generic section styling ---------- */
+  .section{padding:96px 0;}
+  .section-parchment{background:var(--parchment); color:var(--ink);}
+  .section-forest-deep{background:var(--forest-deep);}
+  .kicker{
+    font-family:'IBM Plex Mono', monospace; font-size:0.76rem; text-transform:uppercase;
+    letter-spacing:0.16em; color:var(--ochre); margin-bottom:14px;
+  }
+  .section h2{font-size:clamp(1.8rem, 3.2vw, 2.6rem); max-width:22ch; margin-bottom:20px;}
+  .section-parchment .kicker{color:var(--cherry);}
+  .lead-copy{max-width:60ch; font-size:1.05rem; opacity:0.85; margin-bottom:48px;}
+
+  /* value grid */
+  .grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line);}
+  .grid-4 .card{background:var(--forest); padding:36px 28px;}
+  .card .num{font-family:'IBM Plex Mono',monospace; color:var(--ochre); font-size:0.82rem; margin-bottom:16px;}
+  .card h3{font-size:1.15rem; margin-bottom:10px; font-weight:600;}
+  .card p{font-size:0.94rem; color:var(--parchment-dim);}
+
+  /* who we serve — now photo-led */
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .serve-card{
+    background:var(--forest-deep); border:1px solid var(--line);
+    overflow:hidden; display:flex; flex-direction:column;
+  }
+  .serve-card .photo{height:190px;}
+  .serve-card .body{padding:28px 26px 30px; border-top:3px solid var(--ochre);}
+  .serve-card h3{font-size:1.2rem; margin-bottom:10px;}
+  .serve-card p{color:var(--parchment-dim); font-size:0.94rem;}
+
+  /* story */
+  .story-layout{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:start;}
+  .story-layout p{margin-bottom:18px; font-size:1rem;}
+  .pull{
+    font-family:'Fraunces', serif; font-style:italic; font-size:1.5rem;
+    color:var(--cherry); border-left:3px solid var(--cherry); padding-left:22px;
+    margin:34px 0; line-height:1.35;
+  }
+  .story-media .photo{height:260px; margin-bottom:20px; box-shadow:0 18px 40px -18px rgba(0,0,0,0.5);}
+  .stat-block{background:var(--forest); color:var(--parchment); padding:30px; margin-bottom:16px;}
+  .stat-block .stat-num{font-family:'IBM Plex Mono',monospace; font-size:1.8rem; color:var(--ochre); display:block; margin-bottom:6px;}
+  .stat-block .stat-label{font-size:0.85rem; color:var(--parchment-dim);}
+
+  /* products ledger */
+  .product-banner{height:280px; margin-bottom:56px; box-shadow:0 24px 60px -30px rgba(0,0,0,0.6);}
+  .product-banner .photo-caption{
+    position:absolute; z-index:2; left:0; bottom:0; padding:26px 32px;
+  }
+  .product-banner .photo-caption p{font-family:'Fraunces',serif; font-size:1.3rem; max-width:26ch; color:var(--parchment);}
+  .ledger{width:100%; border-collapse:collapse; margin-bottom:56px;}
+  .ledger caption{text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--ochre); margin-bottom:14px;}
+  .ledger th, .ledger td{
+    text-align:left; padding:16px 18px; border-bottom:1px solid var(--line); font-size:0.94rem;
+  }
+  .ledger th{
+    font-family:'IBM Plex Mono',monospace; font-size:0.74rem; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--ochre); font-weight:500;
+  }
+  .ledger td.item{font-family:'Fraunces',serif; font-weight:500; font-size:1.02rem;}
+  .ledger tr:hover td{background:rgba(239,232,216,0.03);}
+
+  .perks-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); margin-top:8px;}
+  .perk{background:var(--forest); padding:30px 26px;}
+  .perk h4{font-size:1.02rem; margin-bottom:8px;}
+  .perk p{font-size:0.9rem; color:var(--parchment-dim);}
+
+  /* inquiry */
+  .inquiry-layout{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px;}
+  .inquiry-copy h2{margin-bottom:22px;}
+  .inquiry-copy p{margin-bottom:18px; color:var(--parchment-dim);}
+  .audience-tab{
+    border-left:2px solid var(--ochre); padding-left:18px; margin-top:28px;
+  }
+  .audience-tab h4{font-size:0.95rem; margin-bottom:6px; color:var(--ochre); font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.08em; font-weight:500;}
+  .audience-tab p{font-size:0.92rem; margin-bottom:0;}
+
+  form{background:var(--forest-deep); border:1px solid var(--line); padding:38px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px;}
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field.full{grid-column:1/-1;}
+  label{font-size:0.82rem; color:var(--parchment-dim); font-family:'IBM Plex Mono',monospace; letter-spacing:0.03em;}
+  input, select, textarea{
+    background:var(--forest); border:1px solid var(--line); color:var(--parchment);
+    padding:12px 14px; font-family:'Inter',sans-serif; font-size:0.94rem; border-radius:2px;
+  }
+  input:focus, select:focus, textarea:focus{outline:2px solid var(--ochre); outline-offset:1px; border-color:var(--ochre);}
+  textarea{resize:vertical; min-height:88px;}
+  fieldset{border:none; margin-bottom:18px;}
+  fieldset legend{font-size:0.82rem; color:var(--parchment-dim); font-family:'IBM Plex Mono',monospace; letter-spacing:0.03em; margin-bottom:8px;}
+  .check-row{display:flex; gap:20px; flex-wrap:wrap;}
+  .check-row label{display:flex; align-items:center; gap:8px; font-family:'Inter',sans-serif; font-size:0.9rem; color:var(--parchment);}
+  .check-row input{width:auto; padding:0;}
+  form .btn-primary{width:100%; justify-content:center; margin-top:6px;}
+  .form-note{font-size:0.82rem; color:var(--parchment-dim); margin-top:16px; text-align:center;}
+
+  /* faq */
+  .faq-list{max-width:820px;}
+  details{
+    border-bottom:1px solid var(--line); padding:22px 0;
+  }
+  details summary{
+    cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;
+    font-family:'Fraunces', serif; font-size:1.08rem; font-weight:500;
+  }
+  details summary::-webkit-details-marker{display:none;}
+  details summary::after{
+    content:"+"; font-family:'IBM Plex Mono',monospace; color:var(--ochre); font-size:1.3rem; margin-left:20px; transition:transform .2s;
+  }
+  details[open] summary::after{content:"–";}
+  details p{margin-top:14px; color:var(--parchment-dim); font-size:0.95rem; max-width:65ch;}
+
+  /* footer */
+  footer{background:var(--forest-deep); border-top:1px solid var(--line); padding:56px 0 34px;}
+  .footer-top{display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px; margin-bottom:40px;}
+  .footer-brand{max-width:320px;}
+  .footer-brand p{color:var(--parchment-dim); font-size:0.9rem; margin-top:12px;}
+  .footer-cols{display:flex; gap:56px; flex-wrap:wrap;}
+  .footer-col h5{font-family:'IBM Plex Mono',monospace; font-size:0.76rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--ochre); margin-bottom:14px;}
+  .footer-col a{display:block; text-decoration:none; color:var(--parchment-dim); font-size:0.9rem; margin-bottom:10px;}
+  .footer-col a:hover{color:var(--parchment);}
+  .footer-bottom{
+    border-top:1px solid var(--line); padding-top:24px; display:flex; justify-content:space-between;
+    flex-wrap:wrap; gap:10px; font-size:0.8rem; color:var(--parchment-dim);
+  }
+
+  @media (max-width: 860px){
+    .navlinks{display:none;}
+    .grid-4{grid-template-columns:1fr 1fr;}
+    .grid-3{grid-template-columns:1fr;}
+    .story-layout{grid-template-columns:1fr;}
+    .inquiry-layout{grid-template-columns:1fr;}
+    .perks-grid{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .hero{padding:100px 0 70px; min-height:auto;}
+    .section{padding:64px 0;}
+    .product-banner{height:200px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">
+      <svg class="stamp" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="18.5" stroke="#bd8a3d" stroke-width="1.2"/>
+        <circle cx="20" cy="20" r="14" stroke="#bd8a3d" stroke-width="0.6"/>
+        <path d="M20 10 C24 14 26 17 26 21 C26 25.4 23.3 28 20 28 C16.7 28 14 25.4 14 21 C14 17 16 14 20 10Z" fill="#bd8a3d"/>
+      </svg>
+      Behera&nbsp;Coffee&nbsp;Works
+    </div>
+    <div class="navlinks">
+      <a href="#story">Our Story</a>
+      <a href="#supply">Supply &amp; Products</a>
+      <a href="#faq">FAQ</a>
+      <a href="#inquiry" class="btn btn-primary">Request a Quote</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-photo">
+    <img src="https://images.unsplash.com/photo-1742107939655-4f8af7484dfa?w=2200&auto=format&fit=crop&q=80" alt="Misty forested hills of the Eastern Ghats">
+  </div>
+  <div class="topo-bg" aria-hidden="true">
+    <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="#efe8d8" stroke-width="1">
+        <path d="M-50,600 C200,500 350,650 600,560 C850,470 1000,600 1250,520" opacity="0.35"/>
+        <path d="M-50,540 C220,440 380,590 620,500 C860,410 1020,540 1250,460" opacity="0.28"/>
+        <path d="M-50,480 C240,380 400,530 640,440 C870,350 1040,480 1250,400" opacity="0.22"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow">Eastern Ghats · Koraput, Odisha · Farm-Direct</p>
+    <h1>From the shade-grown forests of Koraput, <em>straight to your cup.</em></h1>
+    <p class="lede">We supply premium, single-origin Arabica — sourced directly from tribal farmers in the Eastern Ghats — to offices, IT parks, cafes, and retail shops across India. No middlemen. No unmarked blends. Just traceable coffee, delivered reliably in the volumes your business needs.</p>
+    <div class="hero-ctas">
+      <a href="#inquiry" class="btn btn-primary">Request a Corporate Quote</a>
+      <a href="#supply" class="btn btn-ghost">Order a Sample Kit</a>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <span>100% Shade-Grown Arabica</span>
+    <span>Direct-from-Farmer Sourcing</span>
+    <span>GST-Compliant Invoicing</span>
+    <span>Pan-India Bulk Delivery</span>
+    <span>Fair Prices to Farmers</span>
+  </div>
+</div>
+
+<!-- ============ VALUE PROPS ============ -->
+<section class="section">
+  <div class="wrap">
+    <p class="kicker">Why Businesses Work With Us</p>
+    <h2>Coffee sourcing your procurement team won't have to think twice about</h2>
+  </div>
+  <div class="grid-4">
+    <div class="card">
+      <p class="num">01</p>
+      <h3>Farm-Direct, Always</h3>
+      <p>Every bag is bought directly from tribal growing communities in Koraput — no brokers, no traders. You know exactly which hills your coffee came from.</p>
+    </div>
+    <div class="card">
+      <p class="num">02</p>
+      <h3>Single-Origin, Eastern Ghats</h3>
+      <p>Grown under native forest canopy at altitude. The slow, shade-grown maturation gives a naturally sweeter, more balanced cup than sun-grown commodity Arabica.</p>
+    </div>
+    <div class="card">
+      <p class="num">03</p>
+      <h3>Built for Bulk</h3>
+      <p>From a 50-cup pantry to a 20-outlet cafe chain, our supply chain scales with you — with consistent quality on every single order.</p>
+    </div>
+    <div class="card">
+      <p class="num">04</p>
+      <h3>Corporate Perks</h3>
+      <p>Weekly delivery, flexible credit terms, and automated restocking — so coffee never becomes someone's Monday-morning problem again.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO WE SERVE ============ -->
+<section class="section section-forest-deep">
+  <div class="wrap">
+    <p class="kicker">Who We Serve</p>
+    <h2>One supplier, three very different orders — handled the same way: well</h2>
+    <div class="grid-3" style="margin-top:44px;">
+      <div class="serve-card">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1467664631004-58beab1ece0d?w=900&auto=format&fit=crop&q=75" alt="Coffee served at a business meeting">
+        </div>
+        <div class="body">
+          <h3>Offices &amp; IT Companies</h3>
+          <p>Upgrade the pantry. Give your team coffee worth talking about, without adding another vendor headache to HR's plate.</p>
+        </div>
+      </div>
+      <div class="serve-card">
+        <div class="photo warm">
+          <img src="https://images.unsplash.com/photo-1761271046396-97d231b59dd7?w=900&auto=format&fit=crop&q=75" alt="Barista pouring latte art in a cafe">
+        </div>
+        <div class="body">
+          <h3>Cafes &amp; Roasteries</h3>
+          <p>A consistent, traceable single-origin bean your baristas and customers will both notice. Custom roast profiles available on request.</p>
+        </div>
+      </div>
+      <div class="serve-card">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1753837787691-84a06d715d24?w=900&auto=format&fit=crop&q=75" alt="Roasted coffee beans ready for retail packaging">
+        </div>
+        <div class="body">
+          <h3>Retail Shops</h3>
+          <p>Stock a coffee with a real story — shade-grown, tribal-farmed, Eastern Ghats origin — that stands out on a shelf of anonymous blends.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUR STORY ============ -->
+<section class="section section-parchment" id="story">
+  <div class="wrap">
+    <p class="kicker">Our Story</p>
+    <h2>Koraput: where the forest grows the coffee</h2>
+    <div class="story-layout" style="margin-top:44px;">
+      <div>
+        <p>Tucked into the Eastern Ghats of southern Odisha, Koraput is a landscape of dense forest, tribal villages, and altitude — the kind of terrain that, almost by accident, produces exceptional coffee. Long before "single-origin" became a marketing term, farmers here grew Arabica the only way they knew: under the shade of native trees, alongside turmeric and pepper, on small plots tended across generations.</p>
+        <p>We didn't invent this method. We simply chose to work with the people who've practiced it for decades, and to make sure the value of that work reaches them directly.</p>
+        <div class="pull">"When you serve our coffee, you're serving a cup with a place, a people, and a practice behind it — not just a bean."</div>
+        <p><strong>The farmers.</strong> Our coffee is grown by tribal smallholder farmers across the hill villages of Koraput, many cultivating less than two acres of mixed forest garden. We buy directly from these farmers and farmer collectives — no auction floors, no anonymous aggregation — which means full traceability for you, and a meaningfully larger share of the price reaching the grower.</p>
+        <p><strong>Shade-grown, by necessity and by design.</strong> The forest canopy slows cherry maturation, concentrating sugars and flavour in the bean — a naturally sweeter, lower-acid, more balanced cup than fast-grown, sun-exposed Arabica. It's also better for the land: shade cultivation preserves topsoil, supports pollinators, and keeps these hill farms productive season after season.</p>
+      </div>
+      <div class="story-media">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1672851612794-6687bf0bf1a3?w=900&auto=format&fit=crop&q=80" alt="Ripe coffee cherries growing under forest shade">
+        </div>
+        <div class="photo warm">
+          <img src="https://images.unsplash.com/photo-1712143525667-717b146a141f?w=900&auto=format&fit=crop&q=80" alt="Hands holding freshly harvested coffee beans">
+        </div>
+        <div class="stat-block">
+          <span class="stat-num mono">100%</span>
+          <span class="stat-label">Direct-from-farmer sourcing — no brokers, no blending houses</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUPPLY & PRODUCTS ============ -->
+<section class="section" id="supply">
+  <div class="wrap">
+    <p class="kicker">B2B Supply &amp; Products</p>
+    <h2>Coffee supply built around how your business actually runs</h2>
+    <p class="lead-copy">Whether you're stocking one office pantry or a chain of cafes, our offerings are structured around reliability, flexibility, and freshness — not one-size-fits-all retail packs.</p>
+
+    <div class="product-banner photo">
+      <img src="https://images.unsplash.com/photo-1753837787691-84a06d715d24?w=1800&auto=format&fit=crop&q=80" alt="Close-up of freshly roasted coffee beans">
+      <div class="photo-caption">
+        <p>Roasted to order. Never held in warehouse stock.</p>
+      </div>
+    </div>
+
+    <table class="ledger">
+      <caption>Product Range</caption>
+      <thead>
+        <tr><th>Item</th><th>Format</th><th>Best For</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item">Whole Bean</td>
+          <td>Roasted to order, one-way valve bags</td>
+          <td>Cafes and offices with in-house grinders</td>
+        </tr>
+        <tr>
+          <td class="item">Ground Coffee</td>
+          <td>Filter, French press, espresso, or South Indian filter grind</td>
+          <td>Offices and retail — no equipment required</td>
+        </tr>
+        <tr>
+          <td class="item">Custom Roast Profiles</td>
+          <td>Light, medium, dark, or a curve developed with you</td>
+          <td>Cafes and roasteries building a signature blend</td>
+        </tr>
+        <tr>
+          <td class="item">Sample Kits</td>
+          <td>Small-batch trial packs, single-origin or blend</td>
+          <td>Procurement teams tasting before they commit</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="ledger">
+      <caption>Bulk Packaging</caption>
+      <thead>
+        <tr><th>Pack Size</th><th>Best For</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="item">1 kg sacks</td><td>Small offices, single-outlet cafes, retail trial stock</td></tr>
+        <tr><td class="item">5 kg sacks</td><td>Mid-size offices, established cafes, retail chains</td></tr>
+        <tr><td class="item">10 kg sacks</td><td>IT parks, corporate campuses, multi-outlet cafe brands</td></tr>
+        <tr><td class="item">Custom volumes</td><td>Large enterprises and distributors — talk to our team</td></tr>
+      </tbody>
+    </table>
+
+    <p class="kicker" style="margin-top:56px;">Corporate Perks</p>
+    <div class="perks-grid">
+      <div class="perk">
+        <h4>Weekly Delivery Schedules</h4>
+        <p>Set a recurring cadence so your pantry or counter is never caught short.</p>
+      </div>
+      <div class="perk">
+        <h4>Flexible Credit Terms</h4>
+        <p>Qualified accounts can move to invoice-based billing instead of paying upfront.</p>
+      </div>
+      <div class="perk">
+        <h4>Automated Restocking</h4>
+        <p>We flag and schedule restocks before you run low — no emergency coffee runs.</p>
+      </div>
+      <div class="perk">
+        <h4>Dedicated Account Support</h4>
+        <p>One point of contact for order changes, roast adjustments, and invoicing.</p>
+      </div>
+      <div class="perk">
+        <h4>GST-Compliant Invoicing</h4>
+        <p>Proper tax invoices on every order, ready for your accounts team.</p>
+      </div>
+      <div class="perk">
+        <h4>Sample-First Ordering</h4>
+        <p>Taste before you commit to a bulk order or custom roast profile.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INQUIRY ============ -->
+<section class="section section-forest-deep" id="inquiry">
+  <div class="wrap">
+    <div class="inquiry-layout">
+      <div class="inquiry-copy">
+        <p class="kicker">Cafes &amp; Corporate Inquiry</p>
+        <h2>Let's set up your coffee supply</h2>
+        <p>Tell us a little about your business and monthly volume, and we'll put together a tailored quote — with a sample kit, if you'd like to taste first.</p>
+
+        <div class="audience-tab">
+          <h4>For Office Admins &amp; HR Managers</h4>
+          <p>You didn't sign up to become the office coffee expert — but you're the one who hears about it when the pantry coffee is bad. Set a delivery schedule once, and we handle restocking, invoicing, and consistency from there.</p>
+        </div>
+        <div class="audience-tab">
+          <h4>For Cafe Owners</h4>
+          <p>Your customers can taste the difference between a commodity blend and a real single-origin bean. We work with you on custom roast profiles, flexible order sizes, and delivery timed to your actual sales pace.</p>
+        </div>
+      </div>
+
+      <form onsubmit="event.preventDefault(); document.getElementById('form-success').style.display='block'; this.style.display='none';">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Full Name *</label>
+            <input id="name" type="text" required>
+          </div>
+          <div class="field">
+            <label for="business">Business Name *</label>
+            <input id="business" type="text" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="type">Business Type *</label>
+            <select id="type" required>
+              <option value="">Select one</option>
+              <option>Office / IT Company</option>
+              <option>Cafe</option>
+              <option>Roastery</option>
+              <option>Retail Shop</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="city">City / Location *</label>
+            <input id="city" type="text" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="email">Email Address *</label>
+            <input id="email" type="email" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number *</label>
+            <input id="phone" type="tel" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="volume">Estimated Monthly Consumption</label>
+            <select id="volume">
+              <option>Under 5kg</option>
+              <option>5–20kg</option>
+              <option>20–50kg</option>
+              <option>50–100kg</option>
+              <option>100kg+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="outlets">Number of Outlets / Locations</label>
+            <input id="outlets" type="text" placeholder="e.g. 1">
+          </div>
+        </div>
+        <fieldset>
+          <legend>Preferred Format</legend>
+          <div class="check-row">
+            <label><input type="checkbox"> Whole Bean</label>
+            <label><input type="checkbox"> Ground</label>
+            <label><input type="checkbox"> Custom Roast</label>
+            <label><input type="checkbox"> Not Sure Yet</label>
+          </div>
+        </fieldset>
+        <div class="form-row">
+          <div class="field">
+            <label for="sample">Sample Kit First?</label>
+            <select id="sample">
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="contact">Preferred Contact Method</label>
+            <select id="contact">
+              <option>Email</option>
+              <option>Phone</option>
+              <option>WhatsApp</option>
+            </select>
+          </div>
+        </div>
+        <div class="field full" style="margin-bottom:22px;">
+          <label for="notes">Additional Requirements / Notes</label>
+          <textarea id="notes" placeholder="Roast preference, delivery frequency, existing supplier, etc."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Request My Quote</button>
+        <p class="form-note">We typically respond within 1 business day with a tailored quote.</p>
+      </form>
+      <p id="form-success" style="display:none; background:var(--forest-deep); border:1px solid var(--ochre); padding:24px; font-size:0.95rem; grid-column:2;">Thanks — your inquiry has been noted. This is a design preview, so nothing was actually sent yet; connect the form to your email or CRM to go live.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section section-parchment" id="faq">
+  <div class="wrap">
+    <p class="kicker">FAQ</p>
+    <h2>Frequently asked — B2B orders</h2>
+    <div class="faq-list" style="margin-top:36px;">
+      <details open>
+        <summary>What is your Minimum Order Quantity (MOQ)?</summary>
+        <p>Our standard MOQ for business accounts starts at 5kg per order. Smaller trial quantities (1kg) are available for new accounts, and sample kits are available for anyone who wants to taste before committing to a bulk order.</p>
+      </details>
+      <details>
+        <summary>Do you provide GST invoices?</summary>
+        <p>Yes. Every order for a registered business is accompanied by a proper GST-compliant tax invoice, so your accounts team has everything it needs for compliance and input credit.</p>
+      </details>
+      <details>
+        <summary>Can I request a sample before placing a bulk order?</summary>
+        <p>Absolutely — we recommend it. Our sample kits let you and your team, or your baristas, taste the coffee before committing to a larger order or a custom roast profile.</p>
+      </details>
+      <details>
+        <summary>What is the shelf life of your coffee?</summary>
+        <p>Whole bean stays at peak flavour for 6–9 months from the roast date when stored cool and dry, and remains good to use well beyond that. Ground coffee is best used within 2–3 months of roasting. Every bag is labelled with its roast date.</p>
+      </details>
+      <details>
+        <summary>How fresh is the coffee when it arrives — do you roast to order?</summary>
+        <p>Yes, we roast in small batches to order rather than holding speculative stock. Your coffee typically ships within days of roasting, not weeks or months — a meaningful difference in cup quality versus pre-roasted retail stock.</p>
+      </details>
+      <details>
+        <summary>Can we set up recurring or automated deliveries?</summary>
+        <p>Yes. Once we understand your average consumption, we can set up a recurring delivery schedule — weekly, biweekly, or monthly — and proactively flag restocks before you run low.</p>
+      </details>
+      <details>
+        <summary>Do you offer credit terms for businesses?</summary>
+        <p>Qualified business accounts with a consistent order history can move from upfront payment to invoice-based credit terms. Get in touch with our team to discuss eligibility.</p>
+      </details>
+      <details>
+        <summary>Do you deliver pan-India, or only in specific regions?</summary>
+        <p>We currently deliver across India for bulk business orders. Delivery frequency and lead times vary by location — let us know your city in your inquiry and we'll confirm exact timelines.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand">
+          <svg class="stamp" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18.5" stroke="#bd8a3d" stroke-width="1.2"/>
+            <path d="M20 10 C24 14 26 17 26 21 C26 25.4 23.3 28 20 28 C16.7 28 14 25.4 14 21 C14 17 16 14 20 10Z" fill="#bd8a3d"/>
+          </svg>
+          Behera&nbsp;Coffee&nbsp;Works
+        </div>
+        <p>Farm-direct, single-origin Arabica from the Eastern Ghats — supplied to offices, cafes, and retail across India.</p>
+        <p style="margin-top:6px;">Founded by Sushant Kumar Behera.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <a href="#story">Our Story</a>
+          <a href="#supply">Supply &amp; Products</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h5>Business</h5>
+          <a href="#inquiry">Request a Quote</a>
+          <a href="#supply">Sample Kits</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a href="mailto:hello@koraputestates.in">hello@koraputestates.in</a>
+          <a href="tel:+919348697311">+91 93486 97311</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Behera Coffee Works. Sourced in the Eastern Ghats, Odisha.</span>
+      <span class="mono">GSTIN: [Add on Launch]</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
